@@ -1,0 +1,102 @@
+
+
+APB1   42m
+APB2   84m
+
+TIMx clk = APBx *2
+
+中断优先级：
+
+第0组：所有4位用于指定响应优先级；
+第1组：最高1位用于指定抢占式优先级，最低3位用于指定响应优先级；
+第2组：最高2位用于指定抢占式优先级，最低2位用于指定响应优先级；
+第3组：最高3位用于指定抢占式优先级，最低1位用于指定响应优先级；
+第4组：所有4位用于指定抢占式优先级。
+|先抢占，再响应|
+1）如果指定的抢占式优先级别或响应优先级别超出了选定的优先级分组所限定的范围，将可能得到意想不到的结果；
+2）抢占式优先级别相同的中断源之间没有嵌套关系；
+3）如果某个中断源被指定为某个抢占式优先级别，又没有其它中断源处于同一个抢占式优先级别，则可以为这个中断源指定任意有效的响应优先级别。
+
+
+
+
+case 13://旋转完成 速度重置 进树莓派控制 开环！
+				{
+					if(time_dly_cnt_ms<3000)
+					{
+						time_dly_cnt_ms+=20;//ms
+					}
+					else
+					{
+						tar_setdata(0,0,0,0);
+						mission_step +=1;
+						time_dly_cnt_ms=0;
+					}
+				}
+				break;
+				case 14://闪笔 开环飞TMD 直到13号方块 再转90度 这次是逆时针逆时针逆时针逆时针逆时针逆时针逆时针逆时针逆时针
+				{
+					if(received_data.next_task_sign==0)
+					{
+						tar_setdata(received_data.com_x,received_data.com_y,received_data.com_z,received_data.com_yaw);
+					}
+					else
+					{
+						tar_setdata(0,0,0,speed_yaw);
+						mission_step +=1;
+					}
+				}
+				case 15://旋转完成 速度重置 进树莓派控制 开环
+				{
+					if(time_dly_cnt_ms<3000)
+					{
+						time_dly_cnt_ms+=20;//ms
+					}
+					else
+					{
+						tar_setdata(0,0,0,0);
+						mission_step +=1;
+						time_dly_cnt_ms=0;
+					}
+				}
+				break;
+				case 16://闪笔 开环飞TMD 直到7号方块 再转90度 这次也是逆时针逆时针逆时针逆时针逆时针逆时针逆时针逆时针逆时针
+				{
+					if(received_data.next_task_sign==0)
+					{
+						tar_setdata(received_data.com_x,received_data.com_y,received_data.com_z,received_data.com_yaw);
+					}
+					else
+					{
+						tar_setdata(0,0,0,speed_yaw);
+						mission_step +=1;
+					}
+				}
+				break;
+				case 17://旋转完成 速度重置 进树莓派控制 开环
+				{
+					if(time_dly_cnt_ms<3000)
+					{
+						time_dly_cnt_ms+=20;//ms
+					}
+					else
+					{
+						tar_setdata(0,0,0,0);
+						mission_step +=1;
+						time_dly_cnt_ms=0;
+					}
+				}
+				break;
+				case 18://闪笔 开环飞TMD 直到5号方块 再转90度 这次是顺时针顺时针顺时针顺时针顺时针顺时针顺时针顺时针顺时针
+				{
+					if(received_data.next_task_sign==0)
+					{
+						tar_setdata(received_data.com_x,received_data.com_y,received_data.com_z,received_data.com_yaw);
+					}
+					else
+					{
+						tar_setdata(0,0,0,-speed_yaw);
+						mission_step +=1;
+					}
+				}
+				break;
